@@ -96,14 +96,14 @@ module.exports = {
     }),
     new EndWebpackPlugin(async () => {
       // 自定义域名
-      fs.writeFileSync(path.resolve(outputPath, 'CNAME'), 'https://taozhi1010.github.io/resume');
+      fs.writeFileSync(path.resolve(outputPath, 'CNAME'), 'https://taozhi1010.github.io/resume/dist');
 
       await publishGhPages();
 
       // 调用 Chrome 渲染出 PDF 文件
       const chromePath = findChrome();
       spawnSync(chromePath, ['--headless', '--disable-gpu', `--print-to-pdf=${path.resolve(outputPath, 'resume.pdf')}`,
-        'https://taozhi1010.github.io/resume' // 这里注意改成你的在线简历的网站
+        'https://taozhi1010.github.io/resume/dist' // 这里注意改成你的在线简历的网站
       ]);
 
       // 重新发布到 ghpages
